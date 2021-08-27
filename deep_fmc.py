@@ -33,5 +33,5 @@ def colorizer(code):
 
 # GET GPS
 def get_gps():
-    json_back = os.system("termux-location -p passive -r once")
+    json_back = os.popen("termux-location -p passive -r once").read()
     print(json_back)  # DEBUG
