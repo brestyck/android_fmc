@@ -33,5 +33,9 @@ def colorizer(code):
 
 # GET GPS
 def get_gps():
-    json_back = os.popen("termux-location -p passive -r once").read()
-    print(json_back)  # DEBUG
+    os.popen("termux-location -p passive -r once > dump.dat")
+    with open("dump.dat", "r") as dump:
+        json_gps = dump.read()
+        dump.close()
+    os.remove("dump.dat")
+    print(json_gps)
