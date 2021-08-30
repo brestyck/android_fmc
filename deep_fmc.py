@@ -1,4 +1,7 @@
 import os
+import platform
+import json
+import points_database as pd
 
 
 # COLORING
@@ -28,15 +31,68 @@ def colorizer(code):
         "lc": "\u001b[106m"
     }
     return color_codes[code]
+
+
+def cls():
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+
+def aero_cross(up_pars, altitude):
+    cross_page = \
+        f"""
+--------------------------------------
+{up_pars}
+
+{colorizer("blink")}  
+                 ||{colorizer("style_default")}
+            <---------->{colorizer("blink")} 
+                 ||{colorizer("style_default")}
+
+{y()}ALT {altitude}{d()}
+--------------------------------------
+        """
+    print(cross_page)
 # COLORING
 
 
 # GET GPS
 def get_gps():
     json_gps = os.popen("termux-location").read()
-    print(json_gps) # DEBUG
+    print(json_gps)  # DEBUG
     return json_gps
 
 
+def get_gps_debug():
+    json_gps = \
+        """
+    {
+        "latitude": 55.693938333333335,
+        "longitude": 37.552838333333334,
+        "altitude": 161.9,
+        "accuracy": 9.100000381469727,
+        "vertical_accuracy": 0.0,
+        "bearing": 0.0,
+        "speed": 0.0,
+        "elapsedMs": 7,
+        "provider": "gps"
+    }
+"""
+    return json_gps
+
+
+# PARSING ALL THE GPS STUFF
 def parse_json_gps(json_gps):
-    pass
+    gps_data = json.loads(json_gps)
+    return gps_data
+
+
+def get_the_course(thc_origin, thc_destination):
+    origin_params = pd.HUBS[thc_origin]
+    destination_params = pd.HUBS[thc_destination]
+    try:
+        current_way = pd.WAYS[f"{thc_origin}-{thc_destination}"]
+    except IndexError:
+        current_way = pd.WAYS[f"{thc_destination}-{thc_origin}"]
