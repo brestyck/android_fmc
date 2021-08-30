@@ -40,18 +40,18 @@ def cls():
         os.system("clear")
 
 
-def aero_cross(up_pars, altitude):
+def aero_cross(up_pars, altitude, speed):
     cross_page = \
         f"""
 --------------------------------------
 {up_pars}
 
-{colorizer("blink")}  
-                 ||{colorizer("style_default")}
-            <---------->{colorizer("blink")} 
-                 ||{colorizer("style_default")}
+{colorizer("lc")}  
+                 ||{d()}
+            <---------->{colorizer("lc")} 
+                 ||{d()}
 
-{y()}ALT {altitude}{d()}
+{y()}ALT {altitude}{d()} SPD {speed}
 --------------------------------------
         """
     print(cross_page)
