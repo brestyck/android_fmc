@@ -22,14 +22,14 @@ print(f"{df.g()}Course calculated!{df.d()}")
 while True:
     current_point = course[pnt]
     current_point = pd.POINTS[current_point]
-    if df.toFixed(gps["latitude"], 3) == current_point[0]:
-        if df.toFixed(gps["longitude"], 3) == current_point[1]:
-            print(f"APPROACHED POINT f{course[pnt]}")
-            pnt += 1
     if i > 20:
         i = 0
         gps = df.parse_json_gps(df.get_gps())
     df.cls()
+    if df.toFixed(gps["latitude"], 3) == current_point[0]:
+        if df.toFixed(gps["longitude"], 3) == current_point[1]:
+            print(f"APPROACHED POINT f{course[pnt]}")
+            pnt += 1
     up_params = f"{thc_origin} - {thc_destination} | {df.g()}{i}/20{df.d()} | POINT {df.r()}{course[pnt]}{df.d()}"
     inf.aero_cross(up_params, gps["altitude"], gps["speed"])
     sleep(1)
