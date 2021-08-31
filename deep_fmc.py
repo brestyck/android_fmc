@@ -49,11 +49,12 @@ def get_gps():
 
 
 def get_gps_debug():
+    # 55.789, 37.372
     json_gps = \
         """
     {
-        "latitude": 55.693938333333335,
-        "longitude": 37.552838333333334,
+        "latitude": 55.789938333333335,
+        "longitude": 37.372838333333334,
         "altitude": 161.9,
         "accuracy": 9.100000381469727,
         "vertical_accuracy": 0.0,
@@ -77,11 +78,17 @@ def get_the_course(thc_origin, thc_destination):
     # destination_params = pd.HUBS[thc_destination]
     try:
         current_way = pd.WAYS[f"{thc_origin}-{thc_destination}"]
-    except IndexError:
+    except KeyError:
         current_way = pd.WAYS[f"{thc_destination}-{thc_origin}"]
         current_way.reverse()
     return current_way
 
 
-def toFixed(num_object, digits=0):
-    return f"{num_object:.{digits}f}"
+def toFixed(num_object, digits):
+    no_str = str(num_object)[:digits+3]
+    return float(no_str)
+
+
+def tts(text):
+    if platform.system() == "Linux":
+        os.system(f"termux-tts-speak -l eng -p 0.7 -s ALARM -r 0.9 {text}")
