@@ -38,23 +38,6 @@ def cls():
         os.system("cls")
     else:
         os.system("clear")
-
-
-def aero_cross(up_pars, altitude, speed):
-    cross_page = \
-        f"""
---------------------------------------
-{up_pars}
-
-{colorizer("lc")}  
-                 ||{d()}
-            <---------->{colorizer("lc")} 
-                 ||{d()}
-
-{y()}ALT {altitude}{d()} SPD {speed}
---------------------------------------
-        """
-    print(cross_page)
 # COLORING
 
 
@@ -90,9 +73,15 @@ def parse_json_gps(json_gps):
 
 
 def get_the_course(thc_origin, thc_destination):
-    origin_params = pd.HUBS[thc_origin]
-    destination_params = pd.HUBS[thc_destination]
+    # origin_params = pd.HUBS[thc_origin]
+    # destination_params = pd.HUBS[thc_destination]
     try:
         current_way = pd.WAYS[f"{thc_origin}-{thc_destination}"]
     except IndexError:
         current_way = pd.WAYS[f"{thc_destination}-{thc_origin}"]
+        current_way.reverse()
+    return current_way
+
+
+def toFixed(num_object, digits=0):
+    return f"{num_object:.{digits}f}"
