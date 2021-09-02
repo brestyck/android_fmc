@@ -47,6 +47,8 @@ while True:
                 sleep(5)
             if landing_mode:  # We are on the THC, TTS for the crew to stop
                 df.tts(f"RETARD")
+                sleep(10)
+                exit()
 
     if not landing_mode:
         up_params = f"{thc_origin} - {thc_destination} | {df.g()}{i}/20{df.d()} | POINT {df.r()}{course[pnt]}{df.d()}"
@@ -60,6 +62,9 @@ while True:
         ils = pd.HUBS[thc_destination][3]  # Check whether we have ILS
         inf.aero_cross(up_params, f"{altitude}|^|{altitude_est}", gps["speed"], ils)
         inf.bottom_nav_panel(thc_destination, gps["latitude"], gps["longitude"])
+
+    status, recommendations = df.GTS(gps, landing_mode, current_point)
+    inf.GTS_interface(status, recommendations)
 
     sleep(1)
     i += 1

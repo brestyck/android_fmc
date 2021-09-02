@@ -95,3 +95,35 @@ def toFixed(num_object, digits):
 def tts(text):
     if platform.system() == "Linux":
         os.system(f"termux-tts-speak -l eng -p 0.7 -s ALARM -r 0.9 {text}")
+
+
+def GTS(gps, is_landing_mode, point):
+    recommendations = None
+    status = None
+    if is_landing_mode:
+        landing_parameters = pd.HUBS[point]
+        delta_lat = abs(landing_parameters[0] - gps["latitude"])
+        delta_lon = abs(landing_parameters[1] - gps["longitude"])
+        if delta_lon < 0.04 or delta_lat < 0.04:
+            recommendations += f"{y()}LANDING SOON{d()}\n"
+            tts("LANDING PREPARE")
+            status = f"{g()}LANDING{d()}"
+        if landing_parameters[2] != 0.0:
+            if gps["altitude"]-landing_parameters[2] < 20:
+                recommendations += f"{r()}TOO LOW{d()}\n"
+                tts("PULL UP TERRAIN AHEAD")
+                status = f"{r()}LANDING CONFIGURATION FAULT{d()}"
+            elif gps["altitude"]-landing_parameters[2] > 20:
+                recommendations += f"{r()}TOO HIGH{d()}\n"
+                tts("PULL DOWN YOU ARE OUT OF A GLIDE PATH")
+                status = f"{r()}LANDING CONFIGURATION FAULT{d()}"
+    else:
+        status = f"{g()}ACTIVE{d()}"
+    if gps["speed"] == 0.0:
+        recommendations += f"{y()}SPEED ZERO{d()}\n"
+    if gps["provider"] == "gps":
+        recommendations += f"{g()}GPS TURNED ON{d()}\n"
+    if gps["speed"] > 90:
+        recommendations += f"{r()}SLOW DOWN!{d()}\n"
+        tts("SLOW DOWN")
+    return status, recommendations
