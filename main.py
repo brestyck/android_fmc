@@ -23,10 +23,12 @@ while True:
 
     if pnt != len(course) - 1:
         current_point = course[pnt]
+        df.tts(f"NEXT POINT IS {current_point}")
         current_point = pd.POINTS[current_point]
         landing_mode = False
     else:
         current_point = thc_destination
+        df.tts(f"AIRCRAFT LANDING MODE, LANDING POINT IS {current_point}")
         landing_mode = True
 
     if i > 20:
