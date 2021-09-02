@@ -43,7 +43,10 @@ def cls():
 
 # GET GPS
 def get_gps():
-    json_gps = os.popen("termux-location").read()
+    json_gps = os.popen("termux-location -p network").read()
+    if json_gps == "":
+        print(f"{r()}PASSIVE GPS EMPTY, EMULATING FATAL!{d()}")
+        json_gps = os.popen("termux-location").read()
     print(json_gps)  # DEBUG
     return json_gps
 
