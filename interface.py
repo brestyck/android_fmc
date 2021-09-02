@@ -33,8 +33,8 @@ ECS: ETA LAT {df.y()}{df.toFixed(abs(pd.POINTS[next_point][0] - lat) * 100, 3)}{
             f"""
 
 {df.y()}LANDING {df.r()}{next_point}{df.d()}
-ECS {df.r()}LANDMODE{df.d()}: ETA LAT {df.y()}{df.toFixed(abs(pd.POINTS[next_point][0] - lat) * 100, 3)}{df.d()}
-             ETA LON {df.y()}{df.toFixed(abs(pd.POINTS[next_point][1] - lon) * 100, 3)}{df.d()}
+ECS {df.r()}LANDMODE{df.d()}: ETA LAT {df.y()}{df.toFixed(abs(pd.HUBS[next_point][0] - lat) * 100, 3)}{df.d()}
+             ETA LON {df.y()}{df.toFixed(abs(pd.HUBS[next_point][1] - lon) * 100, 3)}{df.d()}
 --------------------------------------
                     """
     print(panel)
