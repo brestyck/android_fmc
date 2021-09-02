@@ -27,3 +27,4 @@ ECS: ETA LAT {df.y()}{abs(pd.POINTS[next_point][0]-lat)}{df.d()}
      ETA LON {df.y()}{abs(pd.POINTS[next_point][1]-lon)}{df.d()}
 --------------------------------------
         """
+    print(panel)
