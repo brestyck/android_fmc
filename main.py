@@ -7,7 +7,7 @@ print(f"{df.y()}Starting FMC....{df.d()}")
 print(f"Accessing GPS....")
 i = 0
 pnt = 0
-gps = df.parse_json_gps(df.get_gps_debug())
+gps = df.parse_json_gps(df.get_gps())
 print(f"{df.g()}GPS DONE")
 bold_s = df.colorizer("bold")
 thc_origin = input(f"{df.d()}ENTER AIRPORT ORIGIN > {bold_s}{df.y()}")
