@@ -98,8 +98,8 @@ def tts(text):
 
 
 def GTS(gps, is_landing_mode, point):
-    recommendations = None
-    status = None
+    recommendations = ""
+    status = ""
     if is_landing_mode:
         landing_parameters = pd.HUBS[point]
         delta_lat = abs(landing_parameters[0] - gps["latitude"])
