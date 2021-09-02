@@ -51,6 +51,7 @@ while True:
     if not landing_mode:
         up_params = f"{thc_origin} - {thc_destination} | {df.g()}{i}/20{df.d()} | POINT {df.r()}{course[pnt]}{df.d()}"
         inf.aero_cross(up_params, gps["altitude"], gps["speed"])  # Set a default cross
+        inf.bottom_nav_panel(course[pnt], gps["latitude"], gps["longitude"])
     else:
         up_params = f"{thc_origin} - {thc_destination} | {df.g()}{i}/20{df.d()} |" \
                     f" {df.y()}LANDING {df.r()}{current_point}{df.d()}"  # Set the landing cross
@@ -58,6 +59,7 @@ while True:
         altitude_est = pd.HUBS[thc_destination][2]
         ils = pd.HUBS[thc_destination][3]  # Check whether we have ILS
         inf.aero_cross(up_params, f"{altitude}|^|{altitude_est}", gps["speed"], ils)
+        inf.bottom_nav_panel(thc_destination, gps["latitude"], gps["longitude"])
 
     sleep(1)
     i += 1
