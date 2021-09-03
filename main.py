@@ -20,7 +20,6 @@ print(f"{df.g()}Course calculated!{df.d()}")
 landing_mode = False
 
 while True:
-
     # Проверка наличия точек в маршруте
     if pnt != len(course) - 1:
         current_point = course[pnt]  # Take the point with NUM PNT from course
@@ -62,6 +61,7 @@ while True:
         ils = pd.HUBS[thc_destination][3]  # Check whether we have ILS
         inf.aero_cross(up_params, f"{altitude}|^|{altitude_est}", gps["speed"], ils)
         inf.bottom_nav_panel(thc_destination, gps["latitude"], gps["longitude"])
+        inf.ils_landing_system(altitude, altitude_est, ils)
 
     status, recommendations = df.GTS(gps, landing_mode, current_point)
     inf.GTS_interface(status, recommendations)

@@ -50,3 +50,35 @@ STATUS: {status}
 --------------------------------------
         """
     print(panel)
+
+
+def ils_landing_system(altitude, eta_altitude, land_conditions):
+    delta = altitude - eta_altitude
+    if delta > 3:
+        minus1 = df.g()
+        minus2 = df.y()
+        if delta > 5:
+            minus1 = df.y()
+            minus2 = df.g()
+    elif delta < -3:
+        plus1 = df.g()
+        plus2 = df.y()
+        if delta < -5:
+            plus1 = df.y()
+            plus2 = df.g()
+    else:
+        plus1 = plus2 = minus1 = minus2 = df.d()
+        color_cross = df.g()
+    panel = \
+        f"""
+TARGET ALTITUDE {eta_altitude}
+CONDITIONS {land_conditions}
+======================================
+                  {plus2}--- 
+                 {plus1}-----{df.d()}
+    {altitude}   -----<{color_cross}-|-{df.d()}>-----
+                 {minus1}-----
+                  {minus2}---{df.d()}
+======================================
+        """
+    print(panel)

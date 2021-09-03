@@ -4,7 +4,8 @@ HUBS = {
     "STRG": [55.809, 37.404, 0.0, "DEFAULT"],
     "TEST": [55.804, 37.408, 0.0, "DEFAULT"],
     "SCHF": [55.695, 37.549, 0.0, "SPD 5 ALT EST"],
-    "DMEA": [55.493, 37.894, 0.0, "SPD 10 ALT EST"]
+    "DMEA": [55.493, 37.894, 0.0, "SPD 10 ALT EST"],
+    "TLMP": [55.692, 37.537, 0.0, "DEBUG CONF"]
 }
 POINTS = {
     "UDU": [55.691, 37.561],
@@ -19,10 +20,14 @@ POINTS = {
     "EAC": [55.823, 36.921],
     "AMM": [55.980, 36.455],
     "SVP": [55.993, 36.243],
-    "SVI": [55.976, 36.216]
+    "SVI": [55.976, 36.216],
+    "LLP": [55.688, 37.545],
+    "LMP": [55.690, 37.542],
+    "LLL": [55.691, 37.551]
 }
 WAYS = {
     "HMLP-SCVD": ["MNS", "MNG", "IUM", "NRS", "EAC", "AMM", "SVP", "SVI"],
     "STRG-TEST": ["UMK", "RMK"],
-    "HMLP-SCHF": ["FTP", "FTA"]
+    "HMLP-SCHF": ["FTP", "FTA"],
+    "HMLP-TLMP": ["LLL", "LMP", "LLP"]
 }
