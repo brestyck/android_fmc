@@ -1,3 +1,4 @@
+import multiprocessing
 import os
 import platform
 import json
@@ -92,9 +93,14 @@ def toFixed(num_object, digits):
     return float(no_str)
 
 
-def tts(text):
+def tts_legal(text):
     if platform.system() == "Linux":
         os.system(f"termux-tts-speak -l eng -p 0.7 -s ALARM -r 0.9 {text}")
+
+
+def tts(text):
+    p = multiprocessing.Process(target=tts_legal(text))
+    p.start()
 
 
 def GTS(gps, is_landing_mode, point):
@@ -106,7 +112,6 @@ def GTS(gps, is_landing_mode, point):
         delta_lon = abs(landing_parameters[1] - gps["longitude"])
         if delta_lon < 0.04 or delta_lat < 0.04:
             recommendations += f"{y()}LANDING SOON{d()}\n"
-            tts("LANDING PREPARE")
             status = f"{g()}LANDING{d()}"
         if landing_parameters[2] != 0.0:
             if gps["altitude"]-landing_parameters[2] < 20:

@@ -4,6 +4,7 @@ import interface as inf
 from time import sleep
 
 print(f"{df.y()}Starting FMC....{df.d()}")
+df.tts("Starting FMC")
 print(f"Accessing GPS....")
 i = 0
 pnt = 0
