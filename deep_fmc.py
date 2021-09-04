@@ -95,7 +95,7 @@ def toFixed(num_object, digits):
 
 def tts_legal(text):
     if platform.system() == "Linux":
-        os.system(f"termux-tts-speak -l eng -p 0.7 -s ALARM -r 0.9 {text}")
+        os.popen(f"termux-tts-speak -l eng -p 0.7 -s ALARM -r 0.9 {text}")
 
 
 def tts(text):

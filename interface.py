@@ -53,6 +53,7 @@ STATUS: {status}
 
 
 def ils_landing_system(altitude, eta_altitude, land_conditions):
+    plus1 = plus2 = minus1 = minus2 = color_cross = df.d()
     delta = altitude - eta_altitude
     if delta > 3:
         minus1 = df.g()
@@ -82,3 +83,22 @@ CONDITIONS {land_conditions}
 ======================================
         """
     print(panel)
+
+
+def interface_main(thc_origin, thc_destination, current_point, i, gps, is_landing_mode):
+    if is_landing_mode:
+        up_params = f"{thc_origin} - {thc_destination} | {df.g()}{i}/20{df.d()} |" \
+                    f" {df.y()}LANDING {df.r()}{current_point}{df.d()}"  # Set the landing cross
+        altitude = gps["altitude"]  # We have to be on an estimated altitude
+        altitude_est = pd.HUBS[thc_destination][2]
+        ils = pd.HUBS[thc_destination][3]  # Check whether we have ILS
+        aero_cross(up_params, f"{altitude}|^|{altitude_est}", gps["speed"], ils)
+        bottom_nav_panel(thc_destination, gps["latitude"], gps["longitude"])
+        ils_landing_system(altitude, altitude_est, ils)
+    if not is_landing_mode:
+        up_params = f"{thc_origin} - {thc_destination} | {df.g()}{i}/20{df.d()} | POINT {df.r()}{current_point}{df.d()}"
+        aero_cross(up_params, gps["altitude"], gps["speed"])  # Set a default cross
+        bottom_nav_panel(current_point, gps["latitude"], gps["longitude"])
+
+    status, recommendations = df.GTS(gps, is_landing_mode, current_point)
+    GTS_interface(status, recommendations)
