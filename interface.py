@@ -77,7 +77,7 @@ CONDITIONS {land_conditions}
 ======================================
                   {plus2}--- 
                  {plus1}-----{df.d()}
-    {altitude}   -----<{color_cross}-|-{df.d()}>-----
+    {altitude}    -----<{color_cross}-|-{df.d()}>-----
                  {minus1}-----
                   {minus2}---{df.d()}
 ======================================

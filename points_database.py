@@ -3,7 +3,7 @@ HUBS = {
     "SCVD": [55.946, 36.208, 0.0, "DEFAULT"],
     "STRG": [55.809, 37.404, 0.0, "DEFAULT"],
     "TEST": [55.804, 37.408, 0.0, "DEFAULT"],
-    "SCHF": [55.695, 37.549, 0.0, "SPD 5 ALT EST"],
+    "SCHF": [55.695, 37.549, 55.0, "SPD 5 ALT EST"],
     "DMEA": [55.493, 37.894, 0.0, "SPD 10 ALT EST"],
     "TLMP": [55.692, 37.537, 0.0, "DEBUG CONF"]
 }
