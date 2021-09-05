@@ -22,7 +22,7 @@ print(f"{df.g()}Course calculated!{df.d()}")
 
 while True:
     # Проверка наличия точек в маршруте
-    if pnt != len(course) - 1:
+    if pnt != len(course):
         current_point = course[pnt]  # Take the point with NUM PNT from course
         current_point = pd.POINTS[current_point]  # Get the coordinates
         landing_mode = False  # Do not set the landing mode
