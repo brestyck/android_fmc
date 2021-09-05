@@ -6,7 +6,7 @@ from time import sleep
 # Introduce variables
 i = 0
 pnt = 0
-gps = df.parse_json_gps(df.get_gps_debug())
+gps = df.parse_json_gps(df.get_gps())
 landing_mode = False
 
 # Get the course and tell user about it
@@ -55,5 +55,11 @@ while True:
     else:
         inf.interface_main(thc_origin, thc_destination, current_point, i, gps, landing_mode)
 
-    sleep(1)
+    try:
+        sleep(1)
+    except KeyboardInterrupt:
+        df.cls()
+        print(f"{df.g()}FMC SHUTDOWN{df.d()}")
+        df.tts("FMC SHUTDOWN")
+        exit()
     i += 1
