@@ -22,18 +22,6 @@ def y():
     return "\u001b[33m"
 
 
-def colorizer(code):
-    color_codes = {
-        "bd": "\u001b[49m",
-        "br": "\u001b[41m",
-        "blink": "\u001b[5m",
-        "style_default": "\u001b[0m",
-        "bold": "\u001b[1m",
-        "lc": "\u001b[106m"
-    }
-    return color_codes[code]
-
-
 def cls():
     if platform.system() == "Windows":
         os.system("cls")
@@ -99,8 +87,9 @@ def tts_legal(text):
 
 
 def tts(text):
-    p = multiprocessing.Process(target=tts_legal(text))
-    p.start()
+    if platform.system() == "Linux":
+        p = multiprocessing.Process(target=tts_legal(text))
+        p.start()
 
 
 def GTS(gps, is_landing_mode, point):

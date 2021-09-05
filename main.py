@@ -6,7 +6,7 @@ from time import sleep
 # Introduce variables
 i = 0
 pnt = 0
-gps = df.parse_json_gps(df.get_gps())
+gps = df.parse_json_gps(df.get_gps_debug())
 landing_mode = False
 
 # Get the course and tell user about it
@@ -51,9 +51,9 @@ while True:
             exit()
 
     if not landing_mode:
-        inf.interface_main(thc_origin, thc_destination, current_point, i, gps, landing_mode)
-    else:
         inf.interface_main(thc_origin, thc_destination, course[pnt], i, gps, landing_mode)
+    else:
+        inf.interface_main(thc_origin, thc_destination, current_point, i, gps, landing_mode)
 
     sleep(1)
     i += 1
