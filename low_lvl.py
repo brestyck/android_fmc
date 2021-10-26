@@ -21,6 +21,10 @@ def y():
     return "\u001b[33m"
 
 
+def c():
+    return "\u001b[36m"
+
+
 def cls():
     if platform.system() == "Windows":
         os.system("cls")
