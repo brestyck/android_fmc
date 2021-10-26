@@ -60,3 +60,7 @@ def parse_json_gps(json_gps):
 def url_query(dat_url):
     hnd = urlopen(dat_url)
     return hnd.read().decode("utf-8")
+
+
+def toFixed(numObj, digits=0):
+    return f"{numObj:.{digits}f}"

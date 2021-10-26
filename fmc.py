@@ -10,8 +10,8 @@ print(f"{low_lvl.d()}Starting...")
 low_lvl.tts("Starting")
 print(f"{low_lvl.y()}Getting initial position...")
 gps_data = low_lvl.parse_json_gps(low_lvl.get_gps())
-lat = gps_data["latitude"]
-lon = gps_data["longitude"]
+lat = low_lvl.toFixed(gps_data["latitude"], 6)
+lon = low_lvl.toFixed(gps_data["longitude"], 6)
 print(f"{low_lvl.g()}LAT {lat} LON {lon}")
 low_lvl.tts("Gps on")
 low_lvl.cls()
@@ -36,6 +36,7 @@ query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/register/{call_sign}
 print(f"{low_lvl.d()}Got answer: {low_lvl.g()}{query}")
 low_lvl.tts("Accessed to route")
 input("\n\n\n\n\nPRESS ENTER TO CONTINUE")
+i = 0
 # INITIAL START
 
 # MAIN CYCLE
@@ -48,7 +49,14 @@ while True:
     print(f"{20*s}{call_sign}")
     print(f"\n{low_lvl.c()}POS INIT")
     print(f"{low_lvl.y()}{lat}{s}{lon}\n\n")
-    print(f"{low_lvl.c()}{d*22}")
-    sleep(10)
+    print(f"{low_lvl.c()}{d*36}")
     # INFO PAGE
+    if i == 10:
+        gps_data = low_lvl.parse_json_gps(low_lvl.get_gps())
+        lat = low_lvl.toFixed(gps_data["latitude"], 6)
+        lon = low_lvl.toFixed(gps_data["longitude"], 6)
+        i = 0
+    else:
+        sleep(10)
+    i += 1
 # MAIN CYCLE
