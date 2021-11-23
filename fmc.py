@@ -41,8 +41,8 @@ i = 0
 # INITIAL START
 
 # MAIN CYCLE
-while True:
-    try:
+try:
+    while True:
         low_lvl.cls()
         print(f"{low_lvl.c()}ACT FPLN")
         print(f"\n{low_lvl.c()}ORIGIN{20*s}DESTINATION")
@@ -58,17 +58,17 @@ while True:
             gps_data = low_lvl.parse_json_gps(low_lvl.get_gps())
             lat = low_lvl.toFixed(gps_data["latitude"], 6)
             lon = low_lvl.toFixed(gps_data["longitude"], 6)
-            query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/squawk/{call_sign}/{lat}/{lon}/ALLGOOD")
+            query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/squawk/{call_sign}/{lat}/{lon}/INPROGRESS")
             i = 0
         else:
             sleep(10)
         i += 1
-    except KeyboardInterrupt:
-        query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/squawk/{call_sign}/{lat}/{lon}/ARRIVED")
-        print(f"Got answer: {low_lvl.g()}{query}")
-        print(f"{low_lvl.y()}Transition over{low_lvl.d()}")
-        low_lvl.tts("Retard")
-        import os
-        sleep(5)
-        os.system("exit")
+except KeyboardInterrupt:
+    query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/squawk/{call_sign}/{lat}/{lon}/ARRIVED")
+    print(f"Got answer: {low_lvl.g()}{query}")
+    print(f"{low_lvl.y()}Transition over{low_lvl.d()}")
+    low_lvl.tts("Retard")
+    sleep(5)
+    exit()
+
 # MAIN CYCLE
