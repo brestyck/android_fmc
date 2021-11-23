@@ -13,7 +13,7 @@ gps_data = low_lvl.parse_json_gps(low_lvl.get_gps())
 lat = low_lvl.toFixed(gps_data["latitude"], 6)
 lon = low_lvl.toFixed(gps_data["longitude"], 6)
 print(f"{low_lvl.g()}LAT {lat} LON {lon}")
-low_lvl.tts("Gps on")
+low_lvl.tts("Position init")
 low_lvl.cls()
 input("\n\n\n\n\nPRESS ENTER TO CONTINUE")
 # ROUTE ENTER
@@ -35,31 +35,40 @@ query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/register/{call_sign}
                           f"{departure_time}/{arrival_time}/"
                           f"{lat}/{lon}")
 print(f"{low_lvl.d()}Got answer: {low_lvl.g()}{query}")
-low_lvl.tts("Accessed to route")
+low_lvl.tts("Access granted")
 input("\n\n\n\n\nPRESS ENTER TO CONTINUE")
 i = 0
 # INITIAL START
 
 # MAIN CYCLE
 while True:
-    low_lvl.cls()
-    print(f"{low_lvl.c()}ACT FPLN")
-    print(f"\n{low_lvl.c()}ORIGIN{20*s}DESTINATION")
-    print(f"{low_lvl.d()}{2*s}{departure_gate}{20*s}{arrival_gate}")
-    print(f"\n{low_lvl.c()}{22*s}TRN NO{low_lvl.d()}")
-    print(f"{20*s}{call_sign}")
-    print(f"\n{low_lvl.c()}POS INIT")
-    print(f"{low_lvl.y()}{lat}{s}{lon}\n\n")
-    print(f"{low_lvl.c()}{d*36}")
-    # INFO PAGE
-    if i == 10:
-        print(f"{low_lvl.r()}Updating geo...{low_lvl.d()}")
-        gps_data = low_lvl.parse_json_gps(low_lvl.get_gps())
-        lat = low_lvl.toFixed(gps_data["latitude"], 6)
-        lon = low_lvl.toFixed(gps_data["longitude"], 6)
-        query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/squawk/{call_sign}/{lat}/{lon}/ALLGOOD")
-        i = 0
-    else:
-        sleep(10)
-    i += 1
+    try:
+        low_lvl.cls()
+        print(f"{low_lvl.c()}ACT FPLN")
+        print(f"\n{low_lvl.c()}ORIGIN{20*s}DESTINATION")
+        print(f"{low_lvl.d()}{2*s}{departure_gate}{20*s}{arrival_gate}")
+        print(f"\n{low_lvl.c()}{22*s}TRN NO{low_lvl.d()}")
+        print(f"{20*s}{call_sign}")
+        print(f"\n{low_lvl.c()}POS INIT")
+        print(f"{low_lvl.y()}{lat}{s}{lon}\n\n")
+        print(f"{low_lvl.c()}{d*36}")
+        # INFO PAGE
+        if i == 10:
+            print(f"{low_lvl.r()}Updating geo...{low_lvl.d()}")
+            gps_data = low_lvl.parse_json_gps(low_lvl.get_gps())
+            lat = low_lvl.toFixed(gps_data["latitude"], 6)
+            lon = low_lvl.toFixed(gps_data["longitude"], 6)
+            query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/squawk/{call_sign}/{lat}/{lon}/ALLGOOD")
+            i = 0
+        else:
+            sleep(10)
+        i += 1
+    except KeyboardInterrupt:
+        query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/squawk/{call_sign}/{lat}/{lon}/ARRIVED")
+        print(f"Got answer: {low_lvl.g()}{query}")
+        print(f"{low_lvl.y()}Transition over{low_lvl.d()}")
+        low_lvl.tts("Retard")
+        import os
+        sleep(5)
+        os.system("exit")
 # MAIN CYCLE
