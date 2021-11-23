@@ -47,7 +47,11 @@ def get_gps():
     json_gps = os.popen("termux-location -p network").read()
     if json_gps == "":
         print(f"{r()}PASSIVE GPS EMPTY, EMULATING FATAL!{d()}")
-        json_gps = os.popen("termux-location").read()
+        try:
+            json_gps = os.popen("termux-location").read()
+        except json.decoder.JSONDecodeError as err:
+            print("JSON DECODE ERROR")
+            print(err)
     print(json_gps)  # DEBUG
     return json_gps
 
