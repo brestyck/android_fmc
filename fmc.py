@@ -52,6 +52,7 @@ while True:
     print(f"{low_lvl.c()}{d*36}")
     # INFO PAGE
     if i == 10:
+        print(f"{low_lvl.r()}Updating geo...{low_lvl.d()}")
         gps_data = low_lvl.parse_json_gps(low_lvl.get_gps())
         lat = low_lvl.toFixed(gps_data["latitude"], 6)
         lon = low_lvl.toFixed(gps_data["longitude"], 6)
