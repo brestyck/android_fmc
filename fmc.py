@@ -32,7 +32,8 @@ arrival_time = dep_time_arr_time[1]
 print(f"{low_lvl.r()}Registration transition...")
 query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/register/{call_sign}/"
                           f"{departure_gate}/{arrival_gate}/"
-                          f"{departure_time}/{arrival_time}")
+                          f"{departure_time}/{arrival_time}/"
+                          f"{lat}/{lon}")
 print(f"{low_lvl.d()}Got answer: {low_lvl.g()}{query}")
 low_lvl.tts("Accessed to route")
 input("\n\n\n\n\nPRESS ENTER TO CONTINUE")
