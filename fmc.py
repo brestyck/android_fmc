@@ -57,7 +57,7 @@ while True:
         gps_data = low_lvl.parse_json_gps(low_lvl.get_gps())
         lat = low_lvl.toFixed(gps_data["latitude"], 6)
         lon = low_lvl.toFixed(gps_data["longitude"], 6)
-        query = low_lvl.url_query(f"https://navrr.herokuapp.com/squawk/{call_sign}/{lat}/{lon}/ALLGOOD")
+        query = low_lvl.url_query(f"https://navrr.herokuapp.com/fmc/squawk/{call_sign}/{lat}/{lon}/ALLGOOD")
         i = 0
     else:
         sleep(10)
